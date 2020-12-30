@@ -1,0 +1,24 @@
+{
+  "service":{
+    "path":"pkg/{{toSnakeCase .ServiceName}}",
+    "file_name":"service.go",
+    "interface_name":"{{toUpperFirstCamelCase .ServiceName}}Service",
+    "struct_name":"stub{{toCamelCase .ServiceName}}Service"
+  },
+  "middleware":{
+    "name":"middleware.go"
+  },
+  "endpoints":{
+    "path":"pkg/{{toSnakeCase .ServiceName}}",
+    "file_name":"endpoints.go"
+  },
+  "transport":{
+    "path":"pkg/{{toSnakeCase .ServiceName}}",
+    "file_name":"handler_{{.TransportType}}.go"
+  },
+  "cmd":{
+   "path":"cmd/{{toSnakeCase .ServiceName}}",
+   "file_name":"main.go"
+  },
+  "default_transport":"http"
+}

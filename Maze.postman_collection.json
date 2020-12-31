@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "4f5328bb-2432-415a-b147-977354c8293c",
+		"name": "Maze",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get spot",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/spots/5fee40dd17deef7778f77da2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spots",
+						"5fee40dd17deef7778f77da2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get path",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/paths?limit=10&page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"paths"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get quadrants",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/quadrants?limit=10&page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quadrants"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create spot",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Entrance\",\n    \"amount\": 2,\n    \"X\": 1,\n    \"Y\": -1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/spots",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create quadrant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"start\": {\n        \"name\": \"Entrance\",\n        \"amount\": 2,\n        \"X\": 1,\n        \"Y\": -1\n    },\n    \"horizontal_direction\": \"left\",\n    \"vertical_direction\": \"top\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/quadrants",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quadrants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Path",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"distance\": 2,\n    \"ax\": 1,\n    \"ay\": -1,\n    \"bx\": 2,\n    \"by\": -2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/paths",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"paths"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update spot",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Entrance 1\",\n    \"amount\": 2,\n    \"X\": 1,\n    \"Y\": -1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/mazes/5fee40dd17deef7778f77da2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mazes",
+						"5fee40dd17deef7778f77da2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update path",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Entrance 1\",\n    \"amount\": 2,\n    \"X\": 1,\n    \"Y\": -1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/mazes/5fee40dd17deef7778f77da2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mazes",
+						"5fee40dd17deef7778f77da2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

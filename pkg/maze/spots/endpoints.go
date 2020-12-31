@@ -1,28 +1,19 @@
-package maze
+package spots
 
 import (
 	"context"
 
 	"github.com/go-kit/kit/endpoint"
+	"github.com/skyaxl/synack/pkg/maze/spots/spotsdomain"
 )
 
-//ApiError Define a error
-type ApiError struct {
-	Msg    string
-	Status int
-	Code   string
-}
-
-func (e ApiError) Error() string {
-	return e.Msg
-}
-
-// Endpoints collects all of the endpoints that compose the maze  It's
+// Endpoints collects all of the endpoints that compose the spot  It's
 // meant to be used as a helper struct, to collect all of the endpoints into a
 // single parameter.
 type Endpoints struct {
 	CreateEndpoint endpoint.Endpoint
 	GetEndpoint    endpoint.Endpoint
+	GetAllEndpoint endpoint.Endpoint
 	DeleteEndpoint endpoint.Endpoint
 	UpdateEndpoint endpoint.Endpoint
 }
@@ -35,35 +26,30 @@ type ByIDRequest struct {
 // UpdateRequest collects the request parameters for the Update method.
 type UpdateRequest struct {
 	ID   string
-	Maze Maze
-}
-
-// UpdateResponse collects the response values for the Update method.
-type UpdateResponse struct {
-	M0 Maze
-	E1 error
+	Spot spotsdomain.Spot
 }
 
 // NewEndpoints return a new instance of the endpoint that wraps the provided
-func NewEndpoints(svc MazeService) (ep Endpoints) {
+func NewEndpoints(svc spotsdomain.SpotsService) (ep Endpoints) {
 	ep.CreateEndpoint = MakeCreateEndpoint(svc)
 	ep.DeleteEndpoint = MakeDeleteEndpoint(svc)
 	ep.GetEndpoint = MakeGetEndpoint(svc)
+	ep.GetAllEndpoint = MakeGetAllEndpoint(svc)
 	ep.UpdateEndpoint = MakeUpdateEndpoint(svc)
 	return ep
 }
 
 // MakeCreateEndpoint returns an endpoint that invokes Create on the
 // Primarily useful in a server.
-func MakeCreateEndpoint(svc MazeService) (ep endpoint.Endpoint) {
+func MakeCreateEndpoint(svc spotsdomain.SpotsService) (ep endpoint.Endpoint) {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		req := request.(Maze)
+		req := request.(spotsdomain.Spot)
 		return svc.Create(ctx, req)
 	}
 }
 
 // MakeDeleteEndpoint returns an endpoint that invokes Delete on the
-func MakeDeleteEndpoint(svc MazeService) (ep endpoint.Endpoint) {
+func MakeDeleteEndpoint(svc spotsdomain.SpotsService) (ep endpoint.Endpoint) {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(ByIDRequest)
 		return nil, svc.Delete(ctx, req.ID)
@@ -71,17 +57,25 @@ func MakeDeleteEndpoint(svc MazeService) (ep endpoint.Endpoint) {
 }
 
 // MakeGetEndpoint returns an endpoint that invokes get on the
-func MakeGetEndpoint(svc MazeService) (ep endpoint.Endpoint) {
+func MakeGetEndpoint(svc spotsdomain.SpotsService) (ep endpoint.Endpoint) {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(ByIDRequest)
 		return svc.Get(ctx, req.ID)
 	}
 }
 
+// MakeGetAllEndpoint returns an endpoint that invokes get on the
+func MakeGetAllEndpoint(svc spotsdomain.SpotsService) (ep endpoint.Endpoint) {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		req := request.(spotsdomain.Pagination)
+		return svc.GetAll(ctx, req)
+	}
+}
+
 // MakeUpdateEndpoint returns an endpoint that invokes Update on the
-func MakeUpdateEndpoint(svc MazeService) (ep endpoint.Endpoint) {
+func MakeUpdateEndpoint(svc spotsdomain.SpotsService) (ep endpoint.Endpoint) {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(UpdateRequest)
-		return svc.Update(ctx, req.Maze)
+		return svc.Update(ctx, req.Spot)
 	}
 }

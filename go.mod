@@ -1,11 +1,11 @@
-module github.com/skyaxl
+module github.com/skyaxl/synack
 
 go 1.15
 
 require (
 	github.com/go-kit/kit v0.10.0
 	github.com/gorilla/mux v1.8.0
-	github.com/kujtimiihoxha/kit v0.1.1 // indirect
-	github.com/skyaxl/gk v0.0.0-20201230000009-54c855dd350d // indirect
+	github.com/gorilla/schema v1.2.0
+	github.com/stretchr/testify v1.6.1
 	go.mongodb.org/mongo-driver v1.4.4
 )

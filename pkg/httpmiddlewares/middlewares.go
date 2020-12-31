@@ -1,4 +1,4 @@
-package maze
+package httpmiddlewares
 
 import (
 	"bytes"
@@ -19,14 +19,14 @@ func (lh LogHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		req.Body = ioutil.NopCloser(bytes.NewReader(bts))
 	}
 
-	fmt.Printf("[Request][Path:'%s'][Body: %s][Headers: %v]", req.URL.String(), string(bts), req.Header)
-	lh.ServeHTTP(res, req)
+	fmt.Printf("[Request][Path:'%s'][Body: %s]", req.URL.String(), string(bts))
+	lh.Original.ServeHTTP(res, req)
 	if req.Response != nil {
 		if req.Response.Body != nil {
 			bts, _ = ioutil.ReadAll(req.Body)
 			req.Response.Body = ioutil.NopCloser(bytes.NewReader(bts))
 		}
-		fmt.Printf("[Response][Path: '%s'][Status: %s][Body: %s][Headers: %v][ResponseBody: %s]", req.URL.String(), req.Response.Status, string(bts), req.Header, string(bts))
+		fmt.Printf("[Response][Path: '%s'][Status: %s][Body: %s][ResponseBody: %s]", req.URL.String(), req.Response.Status, string(bts), string(bts))
 	}
 
 }
